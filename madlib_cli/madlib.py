@@ -32,13 +32,17 @@ regex2 = '({[^}]*})'
 
 match = re.findall(regex1, template)
 
-responses = []
+userResponses = []
 
 for i in match:
   print(i)
-  responses.append(str(input()))
+  userResponses.append(str(input()))
   print('\n')
 
 
+regex = re.compile('({[^}]*})', re.X)
 
-print(responses)
+for i in userResponses:
+  finalMadlib = regex.sub(lambda m: m.group().replace('*',i,1), template)
+
+print(finalMadlib)

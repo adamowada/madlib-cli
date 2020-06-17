@@ -1,8 +1,12 @@
-# https://stackoverflow.com/questions/47782353/python-using-regex-to-search-for-a-string-then-append-each-match-to-a-new-list
-# https://www.geeksforgeeks.org/python-regex-re-search-vs-re-findall/
-# https://stackoverflow.com/questions/413071/regex-to-get-string-between-curly-braces?newreg=c69f3c6ab1a34d9889687842884323b7
+# https://stackoverflow.com/questions/47782353/python-using-regex-to-search-for-a-string-then-append-each-match-to-a-new-list helped me with regex
+# https://www.geeksforgeeks.org/python-regex-re-search-vs-re-findall/ helped me with regex findall
+# https://stackoverflow.com/questions/413071/regex-to-get-string-between-curly-braces?newreg=c69f3c6ab1a34d9889687842884323b7 helped me with the regular expression string itself
 
-# https://docs.python.org/2/library/re.html
+# https://docs.python.org/2/library/re.html helped me a lot with regex methods
+
+# https://stackoverflow.com/questions/59313087/python-regex-how-to-replace-each-match-individually helped me with the idea to use match objects
+# https://docs.python.org/3/library/re.html#match-objects helped me with match objects
+
 import re
 
 print("""
@@ -22,7 +26,7 @@ and saved as a text file. Have fun!
 
 """)
 
-template =""
+template = ""
 
 with open('sample_template.txt', 'r') as template:
   template = template.read()
@@ -30,19 +34,14 @@ with open('sample_template.txt', 'r') as template:
 regex1 = '{([^}]*)}'
 regex2 = '({[^}]*})'
 
-match = re.findall(regex1, template)
+matches = re.findall(regex1, template)
 
-userResponses = []
+for i in range(len(matches)):
+    m = re.search(regex2, template)
+    print(matches[i])
+    template = template[:m.start()] + input() + template[m.end():]
+    print('\n')
 
-for i in match:
-  print(i)
-  userResponses.append(str(input()))
-  print('\n')
+print(template)
 
 
-regex = re.compile('({[^}]*})', re.X)
-
-for i in userResponses:
-  finalMadlib = regex.sub(lambda m: m.group().replace('*',i,1), template)
-
-print(finalMadlib)

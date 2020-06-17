@@ -20,7 +20,7 @@ and saved as a text file. Have fun!
 template = ""
 
 with open('sample_template.txt', 'r') as template:
-  template = template.read()
+    template = template.read()
 
 regex1 = '{([^}]*)}'
 regex2 = '({[^}]*})'
@@ -35,4 +35,5 @@ for i in range(len(matches)):
 
 print(template)
 
-
+with open('madlib_result.txt', 'w+') as result:
+    result.write(template)
